@@ -13,25 +13,39 @@
 
 using namespace std;
 
-namespace ariel {
+namespace ariel
+{
 
-    class Team {
-        vector<Character*> listCharacter;
-        Character* leader;
+    class Team
+    {
+        vector<Character *> listCharacter;
+        Character *leader;
 
     public:
-        Team(Character* leader);
-        void add(Character* member);
-        void attack(const Team* enemy);
+        Team(Character *leader);
+        ~Team()
+        {
+            for (Character *member : listCharacter)
+            {
+                delete member;
+            }
+        }
+        Team(const Team &) = delete;
+        Team &operator=(const Team &) = delete; 
+        Team(Team &&) = delete;
+        Team &operator=(Team &&) = delete; 
+
+        void add(Character *member);
+        void attack(const Team *enemy);
         int stillAlive() const;
         void print();
     };
 
-   
-    class SmartTeam : public Team {
+    class SmartTeam : public Team
+    {
     public:
-        SmartTeam(Character* leader) : Team(leader) {}
-        void attack(const Team* enemy);
+        SmartTeam(Character *leader) : Team(leader) {}
+        void attack(const Team *enemy);
         void print();
     };
 

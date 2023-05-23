@@ -22,11 +22,11 @@ namespace ariel
 
         Ninja(const std::string &name, int speed, const Point &location, int hitPoints)
             : Character(name, location, hitPoints), speed(speed){}
-        Ninja(const Ninja &) = delete; //TODO
-        Ninja &operator=(const Ninja &) = delete; //TODO
-        Ninja(Ninja &&) = delete; //TODO
-        Ninja &operator=(Ninja &&) = delete; //TODO
-        ~Ninja(){}; //TODO
+        // Ninja(const Ninja &) = delete; 
+        // Ninja &operator=(const Ninja &) = delete; 
+        // Ninja(Ninja &&) = delete; 
+        // Ninja &operator=(Ninja &&) = delete; 
+        // ~Ninja(){}; 
         int getSpeed() const { return speed; }
         void move(Character *enemy);
         void slash(Character *enemy);
