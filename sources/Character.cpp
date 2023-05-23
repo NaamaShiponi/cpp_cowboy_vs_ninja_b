@@ -4,22 +4,22 @@ using namespace std;
 #include "Team.hpp"
 using namespace ariel;
 
-double Character::distance(Character *other)//TODO
+double Character::distance(Character *other)
 {
-    return 0.0;
+    return this->location.distance(other->getLocation());
 }
 
 void Character::hit(int hitP)
 {
+    if (hitP < 0)
+    {
+        throw std::invalid_argument("Negative hit points are not allowed");
+    }
+
     this->hitPoints = this->hitPoints - hitP;
 }
 
-Point Character::getLocation()
-{
-    return this->location;
-}
-
-char *Character::print() //TODO
+char *Character::print() // TODO
 {
     char *string;
     return string;
@@ -27,6 +27,12 @@ char *Character::print() //TODO
 
 bool Character::isAlive()
 {
-    if(this->hitPoints>0) return true;
-    return false;
+    if (this->hitPoints > 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

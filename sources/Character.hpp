@@ -4,26 +4,30 @@
 
 #include "Point.hpp"
 
-
-
 using namespace std;
 
-namespace ariel{
+namespace ariel
+{
 
-    class Character{
+    class Character
+    {
         Point location;
         int hitPoints;
         string name;
+        bool isInTeam=false;
 
-        public:
-            Character(const string &name,const Point &location,int hitPoints):location(location),name(name),hitPoints(hitPoints){};
-            double distance(Character *other);
-            void hit(int hitP);
-            string getName() const {return name;}
-            Point getLocation();
-            char* print();
-            bool isAlive();
-            
+    public:
+        Character(const string &name, const Point &location, int hitPoints) : location(location), name(name), hitPoints(hitPoints){};
+        double distance(Character *other);
+        void hit(int hitP);
+        string getName() const { return name; }
+        bool getIsInTeam() const{ return isInTeam; }
+        int  getHitPoints() const{ return  hitPoints; }
+        void setIsInTeam(bool isInTeam) { this->isInTeam = isInTeam;}
+        Point getLocation() { return this->location; }  
+        void setLocation(const Point &newlocation) { location=newlocation; }
+        virtual char *print();
+        bool isAlive();
     };
 };
 #endif

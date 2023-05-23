@@ -12,7 +12,6 @@ namespace ariel {
     public:
         Team2(Character* leader) : Team(leader) {}
         void attack(const Team* enemy);
-        int stillAlive();
         void print();
     };
 

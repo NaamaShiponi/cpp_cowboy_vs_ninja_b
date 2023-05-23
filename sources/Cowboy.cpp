@@ -6,11 +6,22 @@ using namespace ariel;
 
 void Cowboy::shoot(Character *enemy)
 {
-    if (this->cartridge > 0 && this->isAlive())
-    {
-        enemy->hit(10);
-        this->cartridge--;
-    }
+    // cout << enemy->getName()<<" " <<enemy->getHitPoints() <<endl;
+    if (!this->isAlive())
+        throw std::runtime_error("Cannot attack: character is not alive");
+
+    if (!enemy->isAlive())
+        throw std::runtime_error("Cannot attack: target is not alive");
+
+    if (this == enemy)
+        throw std::runtime_error("Cannot shoot oneself or invalid target");
+    
+        if (this->cartridge > 0)
+        {
+            enemy->hit(10);
+            this->cartridge--;
+        }
+    
 }
 bool Cowboy::hasboolets()
 {
@@ -18,7 +29,13 @@ bool Cowboy::hasboolets()
         return true;
     return false;
 }
-void Cowboy::reload() {
-    if(this->isAlive())
-        this->cartridge = this->cartridge + 6;
+void Cowboy::reload()
+{
+    if (!this->isAlive())
+    {
+        throw std::runtime_error("Cannot reload: cowboy is not alive");
+    }
+    if (this->isAlive())
+        this->cartridge = 6;
 }
+

@@ -23,7 +23,7 @@ namespace ariel {
         Team(Character* leader);
         void add(Character* member);
         void attack(const Team* enemy);
-        int stillAlive();
+        int stillAlive() const;
         void print();
     };
 
@@ -32,7 +32,6 @@ namespace ariel {
     public:
         SmartTeam(Character* leader) : Team(leader) {}
         void attack(const Team* enemy);
-        int stillAlive();
         void print();
     };
 
