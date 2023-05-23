@@ -28,7 +28,7 @@ namespace ariel
         void setLocation(const Point &newlocation) { location=newlocation; }
         virtual char *print();
         bool isAlive();
-        ~Character()
+        virtual~Character()
         {
         }
         Character(const Character &) = delete;
