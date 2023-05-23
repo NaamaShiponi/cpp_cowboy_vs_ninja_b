@@ -28,6 +28,13 @@ namespace ariel
         void setLocation(const Point &newlocation) { location=newlocation; }
         virtual char *print();
         bool isAlive();
+        ~Character()
+        {
+        }
+        Character(const Character &) = delete;
+        Character &operator=(const Character &) = delete; 
+        Character(Character &&) = delete;
+        Character &operator=(Character &&) = delete; 
     };
 };
 #endif
