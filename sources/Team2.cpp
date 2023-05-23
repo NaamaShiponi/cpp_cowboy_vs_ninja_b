@@ -4,11 +4,13 @@ using namespace std;
 #include "Team2.hpp"
 using namespace ariel;
 
-void Team2::attack(const Team *enemy)
+void Team2::add(Character *member)
 {
-    if (enemy == nullptr)
-    {
-        throw std::invalid_argument("Invalid enemy team");
-    }
+    if (this->listCharacter.size() == 10)
+        throw std::runtime_error("Team is already at maximum capacity");
+    if (member->getIsInTeam())
+        throw std::runtime_error("Teammate is already assigned to another team");
+
+    this->listCharacter.emplace_back(member);
+    member->setIsInTeam(true);
 }
-void Team2::print() {} // TODO

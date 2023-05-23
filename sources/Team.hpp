@@ -18,6 +18,7 @@ namespace ariel
 
     class Team
     {
+    protected:
         vector<Character *> listCharacter;
         Character *leader;
 
@@ -31,9 +32,9 @@ namespace ariel
             }
         }
         Team(const Team &) = delete;
-        Team &operator=(const Team &) = delete; 
+        Team &operator=(const Team &) = delete;
         Team(Team &&) = delete;
-        Team &operator=(Team &&) = delete; 
+        Team &operator=(Team &&) = delete;
 
         void add(Character *member);
         void attack(const Team *enemy);
@@ -45,8 +46,7 @@ namespace ariel
     {
     public:
         SmartTeam(Character *leader) : Team(leader) {}
-        void attack(const Team *enemy);
-        void print();
+        void add(Character *member);
     };
 
 }

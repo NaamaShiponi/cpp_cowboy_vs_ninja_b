@@ -16,14 +16,37 @@ Team::Team(Character *newleader)
     listCharacter.emplace_back(newleader);
 }
 
+
 void Team::add(Character *member)
 {
-    if (this->listCharacter.size() == 10)
+    if (listCharacter.size() == 10)
         throw std::runtime_error("Team is already at maximum capacity");
     if (member->getIsInTeam())
         throw std::runtime_error("Teammate is already assigned to another team");
 
-    this->listCharacter.emplace_back(member);
+    if (dynamic_cast<Cowboy *>(member) != nullptr)
+    {
+        // Add Cowboy character at the beginning of the list
+        listCharacter.insert(listCharacter.begin(), member);
+    }
+    else
+    {
+        // Find the index to insert the Ninja after the last Cowboy (if any)
+        auto it = std::find_if(listCharacter.rbegin(), listCharacter.rend(), [](Character *c) {
+            return dynamic_cast<Cowboy *>(c) != nullptr;
+        });
+        if (it == listCharacter.rend())
+        {
+            // No Cowboys found, add Ninja character at the beginning of the list
+            listCharacter.insert(listCharacter.begin(), member);
+        }
+        else
+        {
+            // Insert Ninja after the last Cowboy
+            listCharacter.insert(it.base(), member);
+        }
+    }
+
     member->setIsInTeam(true);
 }
 
@@ -157,7 +180,25 @@ int Team::stillAlive() const
     }
     return count;
 }
-void Team::print() {} // TODO
+void Team::print()
+{
+    cout << "Team Leader: " << leader->getName() << endl;
+    cout << "Team Members: " << endl;
+    for (Character *member : listCharacter)
+    {
+        cout << "- " << member->getName() << " HitPoints " << member->getHitPoints() << endl;
+    }
+}
 
-void SmartTeam::attack(const Team *enemy) {} // TODO
-void SmartTeam::print() {}                   // TODO
+
+
+void SmartTeam::add(Character *member)
+{
+    if (this->listCharacter.size() == 10)
+        throw std::runtime_error("Team is already at maximum capacity");
+    if (member->getIsInTeam())
+        throw std::runtime_error("Teammate is already assigned to another team");
+
+    this->listCharacter.emplace_back(member);
+    member->setIsInTeam(true);
+}

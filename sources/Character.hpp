@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 #include <iostream>
+#include <cstring>
+#include <sstream>
 
 #include "Point.hpp"
 

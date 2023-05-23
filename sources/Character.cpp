@@ -19,10 +19,15 @@ void Character::hit(int hitP)
     this->hitPoints = this->hitPoints - hitP;
 }
 
-char *Character::print() // TODO
+char *Character::print() 
 {
-    char *string;
-    return string;
+    // Assuming a maximum character name length of 100 and hit points as a maximum of 1000000
+    const int maxLength = 100;
+    char* message = new char[maxLength];
+    snprintf(message, maxLength, "Name: %s, Hit Points: %d", name.c_str(), hitPoints);
+
+    return message;
+
 }
 
 bool Character::isAlive()
