@@ -18,7 +18,6 @@ namespace ariel
 
     class Team
     {
-    protected:
         vector<Character *> listCharacter;
         Character *leader;
 
@@ -40,6 +39,7 @@ namespace ariel
         void attack(const Team *enemy);
         int stillAlive() const;
         void print();
+        void NormalAdd(Character *member);
     };
 
     class SmartTeam : public Team

@@ -15,7 +15,16 @@ Team::Team(Character *newleader)
     leader = newleader;
     listCharacter.emplace_back(newleader);
 }
+void Team::NormalAdd(Character *member)
+{
+    if (this->listCharacter.size() == 10)
+        throw std::runtime_error("Team is already at maximum capacity");
+    if (member->getIsInTeam())
+        throw std::runtime_error("Teammate is already assigned to another team");
 
+    this->listCharacter.emplace_back(member);
+    member->setIsInTeam(true);
+}
 
 void Team::add(Character *member)
 {
@@ -32,9 +41,8 @@ void Team::add(Character *member)
     else
     {
         // Find the index to insert the Ninja after the last Cowboy (if any)
-        auto it = std::find_if(listCharacter.rbegin(), listCharacter.rend(), [](Character *c) {
-            return dynamic_cast<Cowboy *>(c) != nullptr;
-        });
+        auto it = std::find_if(listCharacter.rbegin(), listCharacter.rend(), [](Character *c)
+                               { return dynamic_cast<Cowboy *>(c) != nullptr; });
         if (it == listCharacter.rend())
         {
             // No Cowboys found, add Ninja character at the beginning of the list
@@ -111,7 +119,7 @@ void Team::attack(const Team *enemy)
         {
             for (Character *character : listCharacter)
             {
-                
+
                 if (character->isAlive())
                 {
                     if (Cowboy *cowboy = dynamic_cast<Cowboy *>(character))
@@ -141,7 +149,7 @@ void Team::attack(const Team *enemy)
                 if (!closestCharacter->isAlive())
                 {
                     closestCharacter = nullptr;
-                    if (enemy->stillAlive()>0)
+                    if (enemy->stillAlive() > 0)
                     {
                         minDistance = std::numeric_limits<double>::max();
                         for (Character *enemyCharacter : enemy->listCharacter)
@@ -162,13 +170,10 @@ void Team::attack(const Team *enemy)
                         return;
                     }
                 }
-                
             }
         }
     }
 }
-
-
 
 int Team::stillAlive() const
 {
@@ -190,15 +195,8 @@ void Team::print()
     }
 }
 
-
-
 void SmartTeam::add(Character *member)
 {
-    if (this->listCharacter.size() == 10)
-        throw std::runtime_error("Team is already at maximum capacity");
-    if (member->getIsInTeam())
-        throw std::runtime_error("Teammate is already assigned to another team");
+    this->NormalAdd(member);
 
-    this->listCharacter.emplace_back(member);
-    member->setIsInTeam(true);
 }
